@@ -1,13 +1,7 @@
-//
-//  CommandRunner.swift
-//  
-//
-//  Created by Owen Cruz-Abrams on 9/21/23.
-//
-
+// This code was fetched from https://stackoverflow.com/questions/26971240/how-do-i-run-a-terminal-command-in-a-swift-script-e-g-xcodebuild
 import Foundation
 
-@discardableResult // Add to suppress warnings when you don't want/need a result
+@discardableResult
 func safeShell(_ command: String) throws -> String {
     let task = Process()
     let pipe = Pipe()
@@ -15,10 +9,10 @@ func safeShell(_ command: String) throws -> String {
     task.standardOutput = pipe
     task.standardError = pipe
     task.arguments = ["-c", command]
-    task.executableURL = URL(fileURLWithPath: "/bin/zsh") //<--updated
+    task.executableURL = URL(fileURLWithPath: "/bin/zsh")
     task.standardInput = nil
 
-    try task.run() //<--updated
+    try task.run()
     
     let data = pipe.fileHandleForReading.readDataToEndOfFile()
     let output = String(data: data, encoding: .utf8)!
