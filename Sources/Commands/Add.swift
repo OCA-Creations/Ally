@@ -16,7 +16,7 @@ struct AddOptions: ParsableArguments {
     @Flag(name: [.long], help: "Produce no output.")
     var noOutput = false
 
-    @Argument(help: "The alias to be added. This is the short version. Example: in `ally NEW_ALIAS \"OLD_COMMAND\"`, this is the NEW_ALIAS.")
+    @Argument(help: "The alias to be added. This is the command that will be given in the future, not the longform version being aliased to.")
     var alias: String
     
     @Argument(help: "The long-form command to be aliased to `alias`.")
