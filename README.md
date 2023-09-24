@@ -30,4 +30,3 @@ Some ideas/todos:
 - Convert all of these notes into issues on GitHub.
 - Should we have automatic alias generation based on frequently used commands?
 - Should we have a list of aliases that you can add? `ally defaults DEFAULT_LIST_NAME`?
-

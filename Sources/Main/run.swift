@@ -1,10 +1,10 @@
-// The Swift Programming Language
-// https://docs.swift.org/swift-book
+// Welcome to Ally! This file is called run.swift, not main.swift, because calling it `main` produces errors with the `@main` declaration.
 
 import Foundation
 import ArgumentParser
 
-@available(macOS 13.0, *)
+//TODO: Can we have a lower version requirement?
+
 @main
 struct Ally: ParsableCommand {
     static var configuration = CommandConfiguration(
@@ -14,5 +14,8 @@ struct Ally: ParsableCommand {
         defaultSubcommand: Add.self)
     
     /// The location of the user's `.ally` file on their system.
-    static var dotFileLocation: URL = FileManager.default.homeDirectoryForCurrentUser.appending(path: ".ally")
+    static var dotFileLocation: URL = FileManager.default.homeDirectoryForCurrentUser.appendingPathExtension(".ally")
+    
+    /// The location of the user's `.zshrc` config file on their system.
+    static var zshrcFileLocation: URL = FileManager.default.homeDirectoryForCurrentUser.appendingPathExtension(".zshrc")
 }

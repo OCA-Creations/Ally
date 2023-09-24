@@ -20,7 +20,7 @@ struct RemoveOptions: ParsableArguments {
     var alias: String
     
 }
-@available(macOS 13.0, *)
+
 extension Ally {
     struct Remove: ParsableCommand {
         
@@ -47,7 +47,7 @@ extension Ally {
             }
             dotAllyContents = lines.joined(separator: "\n") + "\n"
             try dotAllyContents.write(to: Ally.dotFileLocation, atomically: true, encoding: .utf8)
-            print("Your .ally file has been re-saved.")
+            print(".Ally file has been resaved, and \(options.alias) is no longer available. To make these settings take effect for this terminal session, ")
         }
     }
 }

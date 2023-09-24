@@ -19,14 +19,14 @@ struct InitOptions: ParsableArguments {
     var noReload: Bool = false
     
 }
-@available(macOS 13.0, *)
+
 extension Ally {
-    @available(macOS 13.0, *)
+    
     struct Init: ParsableCommand {
         
-        func conditionalPrint(_ str: String) {
+        func conditionalPrint(_ items: Any..., separator: String = "\n", terminator: String = "\n") {
             if !options.noOutput {
-                print(str)
+                Swift.print(items.map({String(describing: $0)}).joined(separator: separator), terminator: terminator)
             }
         }
         
@@ -43,7 +43,7 @@ extension Ally {
 alias ally="\(installLocation)"
 
 """
-            let fileLocation = FileManager.default.homeDirectoryForCurrentUser.appending(path: ".ally")
+            let fileLocation = Ally.dotFileLocation
             
             if FileManager.default.fileExists(atPath: fileLocation.absoluteString) {
                 conditionalPrint("Your .ally file exists. We will not overwrite it. Continuing.")
@@ -56,7 +56,7 @@ alias ally="\(installLocation)"
             
             if !options.noZSHRC {
                 // Add to zshrc
-                let currentZSHRCContents = try? String(contentsOf: FileManager.default.homeDirectoryForCurrentUser.appending(path: ".zshrc"))
+                let currentZSHRCContents = try? String(contentsOf: Ally.zshrcFileLocation)
 //                print(currentZSHRCContents)
                 if var currentZSHRCContents {
                     let new = "\n#Put this wherever - it adds the aliases.\nsource $HOME/.ally\n"
@@ -65,7 +65,7 @@ alias ally="\(installLocation)"
                         
                         
                         do {
-                            try currentZSHRCContents.write(to: FileManager.default.homeDirectoryForCurrentUser.appending(path: ".zshrc"), atomically: true, encoding: .utf8)
+                            try currentZSHRCContents.write(to: Ally.zshrcFileLocation, atomically: true, encoding: .utf8)
                         } catch {
                             print("Error saving ZSHRC: \(error.localizedDescription)")
                         }

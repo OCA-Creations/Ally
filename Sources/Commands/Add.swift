@@ -22,9 +22,9 @@ struct AddOptions: ParsableArguments {
     @Argument(help: "The long-form command to be aliased to `alias`.")
     var command: String
 }
-@available(macOS 13.0, *)
+
 extension Ally {
-    @available(macOS 13.0, *)
+    
     struct Add: ParsableCommand {
         func conditionalPrint(_ str: String) {
             if !options.noOutput {
