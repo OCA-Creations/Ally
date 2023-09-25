@@ -4,7 +4,7 @@ Some ideas/todos (strikethrough indicates complete):
 - `ally dot` will open the .ally file
 - `ally edit ALIAS "OLD_COMMAND"` will edit an alias
 - The old command may not need to be in quotes.
-- Allow equals signs: `ally add test=echo` is as valid as `ally add test 'echo'".
+- Allow equals signs: `ally add test=echo` is as valid as `ally add test 'echo'`.
 - `ally install --reinstall` will reinstall and format the dotfile
 - `ally dot format` will format the dotfile
 - Can we call things like `ally init` from a Swift file with pure Swift? Call the class directly?
