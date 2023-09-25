@@ -1,6 +1,6 @@
 // This code was fetched from https://stackoverflow.com/questions/26971240/how-do-i-run-a-terminal-command-in-a-swift-script-e-g-xcodebuild
 
-//TODO: This may only be necessary for the initializer, which can be called directly. Skippable? We would need to anstract initializer logic.
+//TODO: This may only be necessary for the initializer, which can be called directly. Skippable? We would need to abstract initializer logic.
 import Foundation
 
 @discardableResult

@@ -1,6 +1,6 @@
 # Welcome to Ally (pronounced Al-eye)!
 This project is functional, but is NOT YET READY FOR USE! You might damage your system or config by running it! For now, you should download the project, build, and then run the Executable it produces with `EXECUTABLE_LOC init`. You MUST HAVE zsh installed. This tool was hacked in a night - it is still being developed! It is actively in progress, and is currently used, but needs work!
-Some ideas/todos:
+Some ideas/todos (strikethrough indicates complete):
 - `ally dot` will open the .ally file
 - `ally edit ALIAS "OLD_COMMAND"` will edit an alias
 - The old command may not need to be in quotes.
@@ -11,7 +11,7 @@ Some ideas/todos:
 - `ally zshrc` will transfer all current aliases to the .zshrc
 - Improve the quality and organization of the project
 - Improve command docs
-- `ally list` will print a list of aliases
+- <s>`ally list` will print a list of aliases</s>
 - `ally add ALIAS "OLD_COMMAND" -docs "DOCS""` will let the user add documentation for an alias (stored in a comment on the line above.)
 - Support bash and fish shells.
 - Currently, reload doesn't do anything. Can we fix this or remove it altogether?

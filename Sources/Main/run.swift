@@ -10,12 +10,28 @@ struct Ally: ParsableCommand {
     static var configuration = CommandConfiguration(
         commandName: "ally",
         abstract: "A utility for managing ZSH aliases.",
-        subcommands: [Add.self, Init.self, Remove.self],
+        subcommands: [Add.self, Init.self, Remove.self, List.self],
         defaultSubcommand: Add.self)
     
     /// The location of the user's `.ally` file on their system.
-    static var dotFileLocation: URL = FileManager.default.homeDirectoryForCurrentUser.appendingPathExtension(".ally")
+    static var dotFileLocation = {
+        var homeDirectory = FileManager.default.homeDirectoryForCurrentUser
+        if #available(macOS 13.0, *) {
+            homeDirectory.append(path: ".ally")
+        } else {
+            homeDirectory = homeDirectory.appendingPathComponent(".ally")
+        }
+        return homeDirectory
+    }()
     
     /// The location of the user's `.zshrc` config file on their system.
-    static var zshrcFileLocation: URL = FileManager.default.homeDirectoryForCurrentUser.appendingPathExtension(".zshrc")
+    static var zshrcFileLocation = {
+        var homeDirectory = FileManager.default.homeDirectoryForCurrentUser
+        if #available(macOS 13.0, *) {
+            homeDirectory.append(path: ".zshrc")
+        } else {
+            homeDirectory = homeDirectory.appendingPathComponent(".zshrc")
+        }
+        return homeDirectory
+    }()
 }

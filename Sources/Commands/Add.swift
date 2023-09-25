@@ -56,6 +56,7 @@ extension Ally {
             // Ally is now installed, so we can procede.
             // Step #1: Create the new alias line
             let aliasLine = """
+
 alias \(options.alias)="\(options.command)"
 """
             // Step #2: Add it to .ally
