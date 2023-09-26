@@ -72,7 +72,7 @@ alias \(options.alias)="\(options.command)"
             }
             
             if !options.noReload {
-                _ = try? safeShell("source $HOME/.ally")
+                system("source $HOME/.ally")
                 conditionalPrint("The shell has been reloaded, and your alias is now ready to use!")
             } else {
                 conditionalPrint("As requested, we did not reload the shell. You may have to do so on your own.")

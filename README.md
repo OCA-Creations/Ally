@@ -1,4 +1,4 @@
-# Welcome to Ally (pronounced Al-eye)!
+# Welcome to Ally!
 This project is functional, but is NOT YET READY FOR USE! You might damage your system or config by running it! For now, you should download the project, build, and then run the Executable it produces with `EXECUTABLE_LOC init`. You MUST HAVE zsh installed. This tool was hacked in a night - it is still being developed! It is actively in progress, and is currently used, but needs work!
 Some ideas/todos (strikethrough indicates complete):
 - `ally dot` will open the .ally file
@@ -36,3 +36,5 @@ Some ideas/todos (strikethrough indicates complete):
     - `hacking` - all the aliases and tools one needs to hack.
     - `allyutils` or `generalutils` - these are things that make using `ally` or the Terminal easier, such as a `reload` command that reloads everything - `source $HOME_DIR/.ally`, etc.
 - Improve verbosity, especially when adding a command. This could be specified with a degree of verbosity (like TensorFlow). We would need to warn users when entering aliases that already exist or aliasing over existing commands (see CommandRunner.swift to test out if a command already exists).
+- What if we allowed users to create their own CLI tools from scripts? So the user passes in `ally add SCRIPT.py` (or another language), and then ally adds an alias for the script, and creates a CLI for it?
+- Add to PATH instead of an alias.
