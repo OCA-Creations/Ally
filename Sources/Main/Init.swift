@@ -12,12 +12,8 @@ struct InitOptions: ParsableArguments {
     @Flag(name: [.long, .customShort("x")], help: "Don't add the source block to the end of .zshrc.")
     var noZSHRC: Bool = false
     
-    @Flag(name: [.long, .customShort("o")], help: "Produce no output when installing the tool.")
+    @Flag(name: [.long, .customShort("n")], help: "Produce no output when installing the tool.")
     var noOutput: Bool = false
-    
-    @Flag(name: [.long], help: "Don't reload the shell after installing the tool.")
-    var noReload: Bool = false
-    
 }
 
 extension Ally {
@@ -35,18 +31,25 @@ extension Ally {
         @OptionGroup var options: InitOptions
         
         mutating func run() throws {
-            print("Tool is currently installed at: \(CommandLine.arguments[0])")
             // First, create the .ally file
             let installLocation = CommandLine.arguments[0]
             
             let fileContents = """
+# WARNING: DO NOT MODIFY THE `alias ally` LINE UNLESS YOU KNOW WHAT YOU ARE DOING!
+# THE NEXT LINE ENSURES THAT ALLY FUNCTIONS!
 alias ally="\(installLocation)"
 
 """
             let fileLocation = Ally.dotFileLocation
             
             if FileManager.default.fileExists(atPath: fileLocation.absoluteString) {
-                conditionalPrint("Your .ally file exists. We will not overwrite it. Continuing.")
+                let overwriteFile = input("Your .ally file exists. Do you want us to overwrite it? WARNING: THIS CANNOT BE UNDONE! (y/n): ")
+                if overwriteFile == "y" {
+                    writeAllyFile(overwrite: true)
+                } else {
+                    
+                }
+                
             } else {
                 // It doesn't exist, create it
                 FileManager.default.createFile(atPath: fileLocation.absoluteString, contents: nil)
@@ -78,10 +81,16 @@ alias ally="\(installLocation)"
             }
             
             // Source just .zshrc - our file will be sourced as a result
-           _ = try? safeShell("source ~/.zshrc")
+           conditionalPrint("""
+Your .zshrc and .ally files are all set up!
+To reload your current shell session, execute the following command:
+source $HOME/.ally
+""")
             
-            conditionalPrint("Everything is set.")
             
+        }
+        
+        func writeAllyFile(overwrite: Bool) throws {
             
         }
     }
