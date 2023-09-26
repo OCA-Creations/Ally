@@ -12,7 +12,7 @@ Some ideas/todos (strikethrough indicates complete):
 - Improve the quality and organization of the project
 - Improve command docs
 - <s>`ally list` will print a list of aliases</s>
-- `ally add ALIAS "OLD_COMMAND" -docs "DOCS""` will let the user add documentation for an alias (stored in a comment on the line above.)
+- `ally add ALIAS "OLD_COMMAND" -docs "DOCS"` will let the user add documentation for an alias (stored in a comment on the line above.)
 - Support bash and fish shells.
 - Currently, reload doesn't do anything. Can we fix this or remove it altogether?
 - Currently, quotes need to be escaped. Can we auto-escape them?
@@ -30,3 +30,9 @@ Some ideas/todos (strikethrough indicates complete):
 - Convert all of these notes into issues on GitHub.
 - Should we have automatic alias generation based on frequently used commands?
 - Should we have a list of aliases that you can add? `ally defaults DEFAULT_LIST_NAME`?
+- `ally debug -o OUTPUT_FILE_LOCATION` should save a debug report (text file) for contributors to track bugs and other things.
+- Some ideas for defaults:
+    - `os-interop` will let you transport Windows or UNIX commands to your current OS. If you're on Windows, then this would enable `ls` (`dir`), `touch`, etc. This would conversely enable `dir` as a replacement for `ls` on UNIX.
+    - `hacking` - all the aliases and tools one needs to hack.
+    - `allyutils` or `generalutils` - these are things that make using `ally` or the Terminal easier, such as a `reload` command that reloads everything - `source $HOME_DIR/.ally`, etc.
+- Improve verbosity, especially when adding a command. This could be specified with a degree of verbosity (like TensorFlow). We would need to warn users when entering aliases that already exist or aliasing over existing commands (see CommandRunner.swift to test out if a command already exists).
