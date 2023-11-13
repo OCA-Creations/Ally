@@ -10,17 +10,22 @@ import ArgumentParser
 import Darwin
 
 struct AddOptions: ParsableArguments {
-    @Flag(name: [.long], help: "Don't reload the terminal (a.k.a don't run `source`) after adding the alias.")
-    var noReload = false
-    
-    @Flag(name: [.long], help: "Produce no output.")
-    var noOutput = false
-
     @Argument(help: "The alias to be added. This is the command that will be given in the future, not the longform version being aliased to.")
     var alias: String
     
     @Argument(help: "The long-form command to be aliased to `alias`.")
     var command: String?
+    
+    @Option(help: "Description/title of the alias, to be put on the preceding line in the file.")
+    var description: String?
+    
+    @Flag(name: [.long], help: "Reload the terminal (a.k.a run \u{001b}[1msource\u{001b}[0m) after adding the alias.")
+    var reload = false
+    
+    @Flag(name: [.long], help: "Produce no output.")
+    var noOutput = false
+    
+    
 }
 
 extension Ally {
@@ -61,14 +66,25 @@ extension Ally {
                 }
                 // Ally is now installed, so we can procede.
                 // Step #1: Create the new alias line
-                let aliasLine = """
-
-alias \(options.alias)="\(command)"
-"""
+                var aliasLine: String
+                if let description = options.description {
+                    aliasLine = """
+    
+    # \(description)
+    alias \(options.alias)="\(command)"
+    """
+                } else {
+                    aliasLine = """
+    
+    alias \(options.alias)="\(command)"
+    """
+                }
+                
                 // Step #2: Add it to .ally
                 do {
                     var fileContents = try String(contentsOf: dotFileLocation, encoding: .utf8)
-                    if fileContents.range(of: aliasLine) == nil {
+                    // Check to see if the alias itself is already in there
+                    if fileContents.range(of: String(aliasLine.split(separator: "\n").last!)) == nil {
                         fileContents += aliasLine
                         try fileContents.write(to: dotFileLocation, atomically: true, encoding: .utf8)
                     }
@@ -77,7 +93,7 @@ alias \(options.alias)="\(command)"
                     conditionalPrint("There was an error when attempting to write the alias: \(error.localizedDescription)")
                 }
                 
-                if !options.noReload {
+                if options.reload {
                     //                system("source $HOME/.ally")
                     // TODO: Reload shell
                     conditionalPrint("The shell has been reloaded, and your alias is now ready to use!")
@@ -86,7 +102,7 @@ alias \(options.alias)="\(command)"
                 }
             }
             else {
-                print("You didn't provide anything to alias \(options.alias) TO. Please provide a command to alias to.")
+                print("You didn't provide anything to alias '\u{001b}[1m\(options.alias)\u{001b}[0m' TO. Please provide a long-form command to set the alias to.")
             }
             
         }
