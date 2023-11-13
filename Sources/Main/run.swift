@@ -10,7 +10,7 @@ struct Ally: ParsableCommand {
     static var configuration = CommandConfiguration(
         commandName: "ally",
         abstract: "A utility for managing ZSH aliases.",
-        subcommands: [Add.self, Init.self, Remove.self, List.self],
+        subcommands: [Add.self, Init.self, List.self, Remove.self],
         defaultSubcommand: Add.self)
     
     /// The location of the user's `.ally` file on their system.

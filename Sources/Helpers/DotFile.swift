@@ -22,20 +22,23 @@ struct DotFile: Codable {
     /// Print the ``DotFile`` to STDOUT.
     /// - Parameter docs: Whether to print out the docs for each alias in addition to the alias itself.
     func output(docs: Bool) {
-        print("You have \(self.aliases.count) aliases added in Ally.")
+        print("You have ", terminator: "")
+        boldPrint("\(self.aliases.count)", terminator: " ")
+        print("aliases added in Ally.")
         for i in self.aliases {
             if docs {
                 if let idocs = i.docs {
-                    print(idocs)
+                    boldPrint(idocs)
                 }
                 
             }
-            print("\(i.aliasName) -> \(i.longFormCommand)")
+            boldPrint("\(i.aliasName)", terminator: " -> ")
+            print(i.longFormCommand)
         }
     }
 }
 
-//MARK: Parsing extensions + types
+//MARK: - Parsing extensions + types
 extension DotFile {
     struct Alias: Codable {
         var docs: String?
@@ -61,8 +64,6 @@ extension DotFile {
                 let alDocs = alreadyDocs + "\n" + currentLine
                 returnable += parseAlreadyDocs(alreadyDocs: alDocs, index: index+1, lines: lines)
             } else {
-                //It's an alias!
-                print(currentLine)
                 let parts = currentLine.split(separator: "=").map { sub in
                     String(sub)
                 }

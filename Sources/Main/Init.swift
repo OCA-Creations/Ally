@@ -45,15 +45,16 @@ alias ally="\(installLocation)"
             if FileManager.default.fileExists(atPath: fileLocation.absoluteString) {
                 let overwriteFile = input("Your .ally file exists. Do you want us to overwrite it? WARNING: THIS CANNOT BE UNDONE! (y/n): ")
                 if overwriteFile == "y" {
-                    writeAllyFile(overwrite: true)
+                    try writeAllyFile(overwrite: true)
                 } else {
                     
                 }
                 
             } else {
+                
                 // It doesn't exist, create it
                 FileManager.default.createFile(atPath: fileLocation.absoluteString, contents: nil)
-                try? fileContents.write(to: fileLocation, atomically: true, encoding: .utf8)
+                try? fileContents.write(to: fileLocation, atomically: false, encoding: .utf8)
                 print("Created .ally file.")
             }
             

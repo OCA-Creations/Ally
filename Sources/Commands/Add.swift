@@ -20,7 +20,7 @@ struct AddOptions: ParsableArguments {
     var alias: String
     
     @Argument(help: "The long-form command to be aliased to `alias`.")
-    var command: String
+    var command: String?
 }
 
 extension Ally {
@@ -36,48 +36,58 @@ extension Ally {
         @OptionGroup var options: AddOptions
         
         mutating func run() throws {
-            // First, check to ensure that .ally exists. If not, run ally install --no-output
-            let dotFileLocation = Ally.dotFileLocation
-            if FileManager.default.fileExists(atPath: dotFileLocation.relativePath) {
-                // Continue
-            } else {
-                let yesorno = input("Ally has not yet been installed, would you like to install it? (y/n)")
-                if yesorno != "y" {
-                    Ally.Add.exit(withError: nil)
-                }
-                do {
-                    try safeShell("ally install --no-output")
-                    conditionalPrint("Ally is now installed, congratulations! Continuing.")
-                } catch {
-                    conditionalPrint("There was an error installing ally: \(error.localizedDescription). Exiting now.")
-                    Ally.Add.exit(withError: nil)
-                }
+            if options.alias.localizedCaseInsensitiveContains("=") {
+                let newOpts = options.alias.split(separator: "=", maxSplits: 1).map{String($0)}
+                options.alias = newOpts[0]
+                options.command = newOpts[1]
             }
-            // Ally is now installed, so we can procede.
-            // Step #1: Create the new alias line
-            let aliasLine = """
+            if let command = options.command {
+                // First, check to ensure that .ally exists. If not, run ally init --no-output
+                let dotFileLocation = Ally.dotFileLocation
+                if FileManager.default.fileExists(atPath: dotFileLocation.relativePath) {
+                    // Continue
+                } else {
+                    let yesorno = input("Ally has not yet been installed, would you like to install it? (y/n)")
+                    if yesorno != "y" {
+                        Ally.Add.exit(withError: nil)
+                    }
+                    do {
+                        try safeShell("ally init --no-output")
+                        conditionalPrint("Ally is now installed, congratulations! Continuing.")
+                    } catch {
+                        conditionalPrint("There was an error installing ally: \(error.localizedDescription). Exiting now.")
+                        Ally.Add.exit(withError: nil)
+                    }
+                }
+                // Ally is now installed, so we can procede.
+                // Step #1: Create the new alias line
+                let aliasLine = """
 
-alias \(options.alias)="\(options.command)"
+alias \(options.alias)="\(command)"
 """
-            // Step #2: Add it to .ally
-            do {
-                var fileContents = try String(contentsOf: dotFileLocation, encoding: .utf8)
-                if fileContents.range(of: aliasLine) == nil {
-                    fileContents += aliasLine
-                    try fileContents.write(to: dotFileLocation, atomically: true, encoding: .utf8)
+                // Step #2: Add it to .ally
+                do {
+                    var fileContents = try String(contentsOf: dotFileLocation, encoding: .utf8)
+                    if fileContents.range(of: aliasLine) == nil {
+                        fileContents += aliasLine
+                        try fileContents.write(to: dotFileLocation, atomically: true, encoding: .utf8)
+                    }
+                    
+                } catch {
+                    conditionalPrint("There was an error when attempting to write the alias: \(error.localizedDescription)")
                 }
                 
-            } catch {
-                conditionalPrint("There was an error when attempting to write the alias: \(error.localizedDescription)")
+                if !options.noReload {
+                    //                system("source $HOME/.ally")
+                    // TODO: Reload shell
+                    conditionalPrint("The shell has been reloaded, and your alias is now ready to use!")
+                } else {
+                    conditionalPrint("As requested, we did not reload the shell. You may have to do so on your own.")
+                }
             }
-            
-            if !options.noReload {
-                system("source $HOME/.ally")
-                conditionalPrint("The shell has been reloaded, and your alias is now ready to use!")
-            } else {
-                conditionalPrint("As requested, we did not reload the shell. You may have to do so on your own.")
+            else {
+                print("You didn't provide anything to alias \(options.alias) TO. Please provide a command to alias to.")
             }
-            
             
         }
     }
