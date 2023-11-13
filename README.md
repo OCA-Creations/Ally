@@ -4,7 +4,7 @@ Some ideas/todos (strikethrough indicates complete):
 - `ally dot` will open the .ally file
 - `ally edit ALIAS "OLD_COMMAND"` will edit an alias
 - The old command may not need to be in quotes.
-- Allow equals signs: `ally add test=echo` is as valid as `ally add test 'echo'`.
+- <s>Allow equals signs: `ally add test=echo` is as valid as `ally add test 'echo'`.</s>
 - `ally install --reinstall` will reinstall and format the dotfile
 - `ally dot format` will format the dotfile
 - Can we call things like `ally init` from a Swift file with pure Swift? Call the class directly?
@@ -26,7 +26,7 @@ Some ideas/todos (strikethrough indicates complete):
 - Allow the user to add a custom name for ally? `ally name CUSTOM_NAME`?
 - Improve code and args for all commands.
 - Add docs.
-- Add a man page?
+- Add a man page? ([https://github.com/OCA-Creations/Ally](https://github.com/OCA-Creations/Ally/issues/2)
 - Convert all of these notes into issues on GitHub.
 - Should we have automatic alias generation based on frequently used commands?
 - Should we have a list of aliases that you can add? `ally defaults DEFAULT_LIST_NAME`?
