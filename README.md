@@ -1,6 +1,6 @@
 ![AllyLogo](https://github.com/OCA-Creations/Ally/assets/104732280/6ccf9357-c35f-49ed-bc0f-76a841f1a9b6)<?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.1//EN" "http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd">
-<!-- Created with Vectornator (http://vectornator.io/) -->
+<div class="svg-container" style="max-heigt: 100px; margin: 0 auto">
 <svg height="50%" stroke-miterlimit="10" style="fill-rule:nonzero;clip-rule:evenodd;stroke-linecap:round;stroke-linejoin:round;" version="1.1" viewBox="0 0 2000 1140" width="50%" xml:space="preserve" xmlns="http://www.w3.org/2000/svg" xmlns:vectornator="http://vectornator.io" xmlns:xlink="http://www.w3.org/1999/xlink">
 <defs/>
 <clipPath id="ArtboardFrame">
@@ -26,6 +26,7 @@
 </g>
 </g>
 </svg>
+</div>
 
 # Welcome to Ally!
 This project is functional, but is NOT YET READY FOR USE! You might damage your system or config by running it! To install:
