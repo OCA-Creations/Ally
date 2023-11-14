@@ -1,5 +1,21 @@
 # Welcome to Ally!
-This project is functional, but is NOT YET READY FOR USE! You might damage your system or config by running it! For now, you should download the project, build, and then run the Executable it produces with `EXECUTABLE_LOC init`. You MUST HAVE zsh installed. This tool was hacked in a night - it is still being developed! It is actively in progress, and is currently used, but needs work!
+This project is functional, but is NOT YET READY FOR USE! You might damage your system or config by running it! To install:
+## Installation
+One-liner:
+```
+curl https://raw.githubusercontent.com/OCA-Creations/Ally/main/install.sh | sh
+```
+> [!NOTE]
+> The one-liner above assumes this install is **not** intended to be used for development of the Ally tool itself. Also, if you already have a directory named `Ally` in the location in which you are running the script, then install will fail with the following error:
+> ```
+> fatal: destination path 'Ally' already exists and is not an empty directory.
+> ```
+If you wish to install for development, follow the steps below:
+1. Download + Build the project (`git clone` and `swift build` in the folder)
+2. Locate the built executable and move it to the desired location.
+3. Run the executable with the parameter `init`.
+4. Keep developing and building `ally` in the original directory - you may want to use it to add an alias to the Derived Data build!
+## This tool was hacked in a night - it is still being developed! It is actively in progress, and is currently used, but needs work!
 Some ideas/todos (strikethrough indicates complete):
 - <s>`ally dot` will open the .ally file</s>
 - `ally edit ALIAS "OLD_COMMAND"` will edit an alias
