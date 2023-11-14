@@ -26,40 +26,43 @@ struct RemoveOptions: ParsableArguments {
 
 extension Ally {
     struct Remove: ParsableCommand {
-        static var configuration = CommandConfiguration(abstract: "Remove an alias from the Ally/ZSH config.")
-
-        func conditionalOutput(_ str: String) {
-            if !options.noOutput {
-                print(str)
-            }
-        }
+        static var configuration = CommandConfiguration(commandName: "remove", abstract: "Remove an alias from the Ally/ZSH config.")
         @OptionGroup var options: RemoveOptions
-        
-        func scanAndRemoveIfNeeded(alias: String, fileLocation: URL) throws {
-            var dotAllyContents = try String(contentsOf: fileLocation, encoding: .utf8)
-            var lines = dotAllyContents.split(separator: "\n")
-            let finder = "alias \(alias)"
-            for (index, i) in lines.enumerated() {
-                if i.localizedCaseInsensitiveContains(finder) {
-                    lines.remove(at: index)
-                    conditionalOutput("Alias removed from \(fileLocation.lastPathComponent): \u{001b}[1m\(alias)\u{001b}[0m.")
-                }
-            }
-            dotAllyContents = lines.joined(separator: "\n") + "\n"
-            try dotAllyContents.write(to: fileLocation, atomically: true, encoding: .utf8)
-            conditionalOutput(".Ally file has been resaved, and \(alias) is no longer available in the \(fileLocation.lastPathComponent) file. To make these settings take effect for this terminal session, ")
-        }
         
         mutating func run() throws {
             
             // Now, find the line that says alias X
             for alias in options.alias {
-                try scanAndRemoveIfNeeded(alias: alias, fileLocation: Ally.dotFileLocation)
+                try scanAndRemoveIfNeeded(alias: alias, fileLocation: Ally.dotFileLocation, conditionalOutput: !options.noOutput)
                 if options.zshrc {
-                    try scanAndRemoveIfNeeded(alias: alias, fileLocation: Ally.zshrcFileLocation)
+                    try scanAndRemoveIfNeeded(alias: alias, fileLocation: Ally.zshrcFileLocation, conditionalOutput: !options.noOutput)
                 }
             }
             
         }
     }
+}
+
+func scanAndRemoveIfNeeded(alias: String, fileLocation: URL, conditionalOutput: Bool) throws {
+    var dotAllyContents = try String(contentsOf: fileLocation, encoding: .utf8)
+    var lines = dotAllyContents.split(separator: "\n")
+    let finder = "alias \(alias)"
+    for (index, i) in lines.enumerated() {
+        if i.localizedCaseInsensitiveContains(finder) {
+            lines.remove(at: index)
+            // Remove all lines above the index that are #s as well
+            for (lineIndex, line) in lines[0..<index].reversed().enumerated() {
+                print(line)
+                if line.trimmingCharacters(in: .whitespacesAndNewlines).starts(with: "#") && !line.isEmpty {
+                    lines.remove(at: lineIndex)
+                } else if !line.isEmpty{
+                    break
+                }
+            }
+            conditionalOutput ? print("Alias removed from \(fileLocation.lastPathComponent): \u{001b}[1m\(alias)\u{001b}[0m.") : ()
+        }
+    }
+    dotAllyContents = lines.joined(separator: "\n") + "\n"
+    try dotAllyContents.write(to: fileLocation, atomically: true, encoding: .utf8)
+    conditionalOutput ? print(".Ally file has been resaved, and \(alias) is no longer available in the \(fileLocation.lastPathComponent) file. To make these settings take effect for this terminal session, ") : ()
 }

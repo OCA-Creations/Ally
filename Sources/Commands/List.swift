@@ -18,6 +18,7 @@ struct ListOptions: ParsableArguments {
 
 extension Ally {
     struct List: ParsableCommand {
+        static var configuration = CommandConfiguration(commandName: "list", abstract: "List all commands added with ally.")
         @OptionGroup var options: ListOptions
         
         mutating func run() throws {

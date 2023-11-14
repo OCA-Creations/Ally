@@ -52,13 +52,13 @@ extension Ally {
                 if FileManager.default.fileExists(atPath: dotFileLocation.relativePath) {
                     // Continue
                 } else {
-                    let yesorno = input("Ally has not yet been installed, would you like to install it? (y/n)")
+                    let yesorno = input("[SYSTEM] Ally has not yet been installed, would you like to install it? (y/n)")
                     if yesorno != "y" {
                         Ally.Add.exit(withError: nil)
                     }
                     do {
                         try safeShell("ally init --no-output")
-                        conditionalPrint("Ally is now installed, congratulations! Continuing.")
+                        conditionalPrint("[SYSTEM] Ally has been installed and initialized.")
                     } catch {
                         conditionalPrint("There was an error installing ally: \(error.localizedDescription). Exiting now.")
                         Ally.Add.exit(withError: nil)
@@ -84,25 +84,27 @@ extension Ally {
                 do {
                     var fileContents = try String(contentsOf: dotFileLocation, encoding: .utf8)
                     // Check to see if the alias itself is already in there
-                    if fileContents.range(of: String(aliasLine.split(separator: "\n").last!)) == nil {
+                    if fileContents.range(of: "alias \(options.alias)") == nil {
                         fileContents += aliasLine
                         try fileContents.write(to: dotFileLocation, atomically: true, encoding: .utf8)
+                    } else {
+                        conditionalPrint("[WARNING] alias \u{001b}[1m\(options.alias)\u{001b}[0m ALREADY EXISTS. Skipping.")
                     }
                     
                 } catch {
-                    conditionalPrint("There was an error when attempting to write the alias: \(error.localizedDescription)")
+                    conditionalPrint("[ERROR] Saving alias to disk: \(error.localizedDescription)")
                 }
                 
                 if options.reload {
                     //                system("source $HOME/.ally")
                     // TODO: Reload shell
-                    conditionalPrint("The shell has been reloaded, and your alias is now ready to use!")
+                    conditionalPrint("Shell reloaded.")
                 } else {
-                    conditionalPrint("As requested, we did not reload the shell. You may have to do so on your own.")
+                    conditionalPrint("[NOTE]: Shell may require reload.")
                 }
             }
             else {
-                print("You didn't provide anything to alias '\u{001b}[1m\(options.alias)\u{001b}[0m' TO. Please provide a long-form command to set the alias to.")
+                print("[ERROR] No value provided to alias '\u{001b}[1m\(options.alias)\u{001b}[0m' TO. Please provide a long-form command to set the alias to.")
             }
             
         }

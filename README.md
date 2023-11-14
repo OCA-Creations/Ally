@@ -38,3 +38,5 @@ Some ideas/todos (strikethrough indicates complete):
 - Improve verbosity, especially when adding a command. This could be specified with a degree of verbosity (like TensorFlow). We would need to warn users when entering aliases that already exist or aliasing over existing commands (see CommandRunner.swift to test out if a command already exists).
 - What if we allowed users to create their own CLI tools from scripts? So the user passes in `ally add SCRIPT.py` (or another language), and then ally adds an alias for the script, and creates a CLI for it?
 - Add to PATH instead of an alias.
+- Save and restore backups of `.ally` files
+    - Allow sharing + install of custom `.ally` files

@@ -12,7 +12,6 @@ struct Ally: ParsableCommand {
         abstract: "A utility for managing ZSH aliases.",
         subcommands: [Add.self, Init.self, List.self, Remove.self, Dot.self],
         defaultSubcommand: Add.self)
-    
     /// The location of the user's `.ally` file on their system.
     static var dotFileLocation = {
         var homeDirectory = FileManager.default.homeDirectoryForCurrentUser

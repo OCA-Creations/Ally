@@ -86,7 +86,7 @@ extension DotFile {
         let fileContentsList = fileContents.split(separator: "\n").map { sub in
             String(sub)
         }
-        var aliases: [Self.Alias] = parseAlreadyDocs(alreadyDocs: "", index: 0, lines: fileContentsList)
+        let aliases: [Self.Alias] = parseAlreadyDocs(alreadyDocs: "", index: 0, lines: fileContentsList)
         
         return DotFile(location: fileLocation, aliases: aliases)
         

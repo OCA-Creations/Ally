@@ -43,7 +43,7 @@ alias ally="\(installLocation)"
             let fileLocation = Ally.dotFileLocation
             
             if FileManager.default.fileExists(atPath: fileLocation.absoluteString) {
-                let overwriteFile = input("Your .ally file exists. Do you want us to overwrite it? WARNING: THIS CANNOT BE UNDONE! (y/n): ")
+                let overwriteFile = input("[WARNING] Your .ally file exists. Do you want us to overwrite it? WARNING: THIS CANNOT BE UNDONE! (y/n): ")
                 if overwriteFile == "y" {
                     try writeAllyFile(overwrite: true)
                 } else {
@@ -55,7 +55,7 @@ alias ally="\(installLocation)"
                 // It doesn't exist, create it
                 FileManager.default.createFile(atPath: fileLocation.absoluteString, contents: nil)
                 try? fileContents.write(to: fileLocation, atomically: false, encoding: .utf8)
-                print("Created .ally file.")
+                print("[SYSTEM] Created .ally file.")
             }
             
             if !options.noZSHRC {
@@ -71,19 +71,19 @@ alias ally="\(installLocation)"
                         do {
                             try currentZSHRCContents.write(to: Ally.zshrcFileLocation, atomically: true, encoding: .utf8)
                         } catch {
-                            print("Error saving ZSHRC: \(error.localizedDescription)")
+                            print("[ERROR] Saving ZSHRC: \(error.localizedDescription)")
                         }
                     }
                 } else {
-                    conditionalPrint("We couldn't find a .zshrc.")
+                    conditionalPrint("[WARNING] No .zshrc found.")
                 }
             } else {
-                conditionalPrint("Not adding to ZSHRC.")
+                conditionalPrint("[SYSTEM] Not adding to ZSHRC.")
             }
             
             // Source just .zshrc - our file will be sourced as a result
            conditionalPrint("""
-Your .zshrc and .ally files are all set up!
+[SYSTEM] .zshrc and .ally files are set up.
 To reload your current shell session, execute the following command:
 source $HOME/.ally
 """)
