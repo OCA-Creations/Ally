@@ -1,7 +1,3 @@
-# This script installs the Ally tool and is likely used via CuRL from the server in a one-liner
-# First off, clone the repo and use `swift build` to build ally
-echo "[ALLY-SYSTEM]: Welcome to Ally! Ally is a simple, lightweight tool to work with ZSH aliases. It uses pure sh code, so there is no vendor lock-in. This script will explain what it does and ask for permission before doing so."
-echo "[ALLY-SYSTEM] This install script will now clone the Git Repo from GitHub in order to build Ally. Install git from https://git-scm.com if you do not have it installed."
 ask_for_continue() {
     read -p "[PERMISSION] Continue? (y/n) " -n 1 -r
     echo    # (optional) move to a new line
@@ -12,6 +8,11 @@ ask_for_continue() {
     exit 1
 
 }
+
+# This script installs the Ally tool and is likely used via CuRL from the server in a one-liner
+# First off, clone the repo and use `swift build` to build ally
+echo "[ALLY-SYSTEM]: Welcome to Ally! Ally is a simple, lightweight tool to work with ZSH aliases. It uses pure sh code, so there is no vendor lock-in. This script will explain what it does and ask for permission before doing so."
+echo "[ALLY-SYSTEM] This install script will now clone the Git Repo from GitHub in order to build Ally. Install git from https://git-scm.com if you do not have it installed."
 
 ask_for_continue
 git clone https://github.com/OCA-Creations/Ally.git
