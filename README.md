@@ -1,7 +1,19 @@
-<div style="width:200px; margin:0 auto;">
-    <img src="https://user-images.githubusercontent.com/104732280/282874044-6ccf9357-c35f-49ed-bc0f-76a841f1a9b6.svg" alt="Ally Logo" width=500px style="">
+<div align='center'>
+<img src="https://user-images.githubusercontent.com/104732280/282874044-6ccf9357-c35f-49ed-bc0f-76a841f1a9b6.svg" alt="Ally Logo" width=280>
+
+# Ally - ZSH Alias Manager
+
+Create feature-rich bash scripts using simple YAML configuration
+
+<!-- Github tags here -->
+
+## [ocacreations.com](https://ocacreations.com)
+
+---
+
+
 </div>
-<br>
+
 
 
 # Welcome to Ally!
