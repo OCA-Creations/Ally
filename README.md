@@ -84,4 +84,10 @@ Some ideas/todos (strikethrough indicates complete):
 - What if we allowed users to create their own CLI tools from scripts? So the user passes in `ally add SCRIPT.py` (or another language), and then ally adds an alias for the script, and creates a CLI for it?
 - Add to PATH instead of an alias.
 - Save and restore backups of `.ally` files
-    - Allow sharing + install of custom `.ally` files
+    - Allow sharing + install of custom `.ally` files?
+- Allow another syntax in `add` command: `->`
+    - This would allow us to add things like:
+    ```
+    ally add getPID -> "ps aux | grep"
+    ```
+    - Mimics Swift function naming
