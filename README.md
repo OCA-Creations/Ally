@@ -1,4 +1,7 @@
-<img src="https://user-images.githubusercontent.com/104732280/282874044-6ccf9357-c35f-49ed-bc0f-76a841f1a9b6.svg" alt="Ally Logo" width=200px></img>
+<div style="width:200px; margin:0 auto;">
+    <img src="https://user-images.githubusercontent.com/104732280/282874044-6ccf9357-c35f-49ed-bc0f-76a841f1a9b6.svg" alt="Ally Logo" width=200px style="">
+</div>
+<br>
 # Welcome to Ally!
 This project is functional, but is NOT YET READY FOR USE! You might damage your system or config by running it! To install:
 ## Installation
