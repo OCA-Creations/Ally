@@ -1,7 +1,9 @@
 <div style="width:200px; margin:0 auto;">
-    <img src="https://user-images.githubusercontent.com/104732280/282874044-6ccf9357-c35f-49ed-bc0f-76a841f1a9b6.svg" alt="Ally Logo" width=200px style="">
+    <img src="https://user-images.githubusercontent.com/104732280/282874044-6ccf9357-c35f-49ed-bc0f-76a841f1a9b6.svg" alt="Ally Logo" width=500px style="">
 </div>
 <br>
+
+
 # Welcome to Ally!
 This project is functional, but is NOT YET READY FOR USE! You might damage your system or config by running it! To install:
 ## Installation
@@ -9,7 +11,7 @@ One-liner:
 ```
 curl https://raw.githubusercontent.com/OCA-Creations/Ally/main/install.sh | sh
 ```
-> [!NOTE]
+> [!NOTE]  
 > The one-liner above assumes this install is **not** intended to be used for development of the Ally tool itself. Also, if you already have a directory named `Ally` in the location in which you are running the script, then install will fail with the following error:
 > ```
 > fatal: destination path 'Ally' already exists and is not an empty directory.
