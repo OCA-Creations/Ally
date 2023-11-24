@@ -3,7 +3,7 @@
 
 # Ally - ZSH Alias Manager
 
-Create feature-rich bash scripts using simple YAML configuration
+> Love the terminal again! Ally removes the need to repeatedly write long commands, and instead `alias`es them to much shorter ones.
 
 <!-- Github tags here -->
 
@@ -16,8 +16,9 @@ Create feature-rich bash scripts using simple YAML configuration
 
 
 
-# Welcome to Ally!
-This project is functional, but is NOT YET READY FOR USE! You might damage your system or config by running it! To install:
+# Overview
+## 🚧 WARNING 🚧
+This project is functional, but is ⚠️⚠️ NOT YET READY FOR USE! You might damage your system or config by running it! Ally is much more reliable than it was when first started, but still occasionally will exhibit unexpected behavior. The only documented example of this 
 ## Installation
 One-liner:
 ```
