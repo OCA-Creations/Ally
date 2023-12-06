@@ -3,10 +3,10 @@
 
 # Ally - ZSH Alias Manager
 
-> Love the terminal again! Ally removes the need to repeatedly write long commands, and instead `alias`es them to much shorter ones.
+Love the terminal again! Ally removes the need to repeatedly write long commands, and instead `alias`es them to much shorter ones. A quote from the CEO of OCA Creations LLC, [`@MrDevel0per (Owen Cruz-Abrams)`](https://github.com/MrDevel0per):
+> I honestly can't imagine working in my terminal without a `.ally` file. I have tens of aliases added, and I use them everyday. I almost never add anything to my `.zshrc` - all of my aliases are easily stored with `Ally`.
 
 <!-- Github tags here -->
-
 ## [ocacreations.com](https://ocacreations.com)
 
 ---
@@ -18,11 +18,11 @@
 
 # Overview
 ## 🚧 WARNING 🚧
-This project is functional, but is ⚠️⚠️ NOT YET READY FOR USE! You might damage your system or config by running it! Ally is much more reliable than it was when first started, but still occasionally will exhibit unexpected behavior. The only documented example of this 
+This project is functional, but is ⚠️⚠️ NOT YET READY FOR USE! You might damage your system or config by running it! Ally is much more reliable than it was when first started, but still occasionally will exhibit unexpected behavior. The only documented example of this currently is in the `init` command, which will overwrite the existing `.ally` file if invoked again on a system with an existing install.
 ## Installation
-One-liner (inspired by HomeBrew):
+One-liner (inspired by [Homebrew](https://brew.sh):
 ```
-/bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/OCA-Creations/Ally/main/install.sh)
+/bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/OCA-Creations/Ally/main/install.sh)"
 ```
 > [!NOTE]  
 > The one-liner above assumes this install is **not** intended to be used for development of the Ally tool itself. Also, if you already have a directory named `Ally` in the location in which you are running the script, then install will fail with the following error:
