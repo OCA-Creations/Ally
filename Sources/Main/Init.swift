@@ -33,7 +33,7 @@ extension Ally {
         mutating func run() throws {
             // First, create the .ally file
             let installLocation = CommandLine.arguments[0]
-            
+            // We actually want to create a ZSH function for the 
             let fileContents = """
 # WARNING: DO NOT MODIFY THE `alias ally` LINE UNLESS YOU KNOW WHAT YOU ARE DOING!
 # THE NEXT LINE ENSURES THAT ALLY FUNCTIONS!

@@ -19,9 +19,9 @@ Create feature-rich bash scripts using simple YAML configuration
 # Welcome to Ally!
 This project is functional, but is NOT YET READY FOR USE! You might damage your system or config by running it! To install:
 ## Installation
-One-liner:
+One-liner (inspired by HomeBrew):
 ```
-curl https://raw.githubusercontent.com/OCA-Creations/Ally/main/install.sh | sh
+/bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/OCA-Creations/Ally/main/install.sh)
 ```
 > [!NOTE]  
 > The one-liner above assumes this install is **not** intended to be used for development of the Ally tool itself. Also, if you already have a directory named `Ally` in the location in which you are running the script, then install will fail with the following error:
