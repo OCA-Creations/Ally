@@ -46,7 +46,7 @@ extension Ally {
 func scanAndRemoveIfNeeded(alias: String, fileLocation: URL, conditionalOutput: Bool) throws {
     var dotAllyContents = try String(contentsOf: fileLocation, encoding: .utf8)
     var lines = dotAllyContents.split(separator: "\n")
-    let finder = "alias \(alias)"
+    let finder = "alias \(alias)="
     for (index, i) in lines.enumerated() {
         if i.localizedCaseInsensitiveContains(finder) {
             lines.remove(at: index)

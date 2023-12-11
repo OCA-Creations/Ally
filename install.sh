@@ -25,7 +25,7 @@ swift build -c release --build-path ~/ally
 # Then, move the binary to /usr/local/bin
 echo "[ALLY_SYSTEM] The next step requires sudo access in order to move the built binary to your bin. It will only move the built ally binary."
 ask_for_continue
-sudo mv ~/ally/release/ally /usr/local/bin/_ally
+sudo mv ~/ally/release/ally /usr/local/bin/ally
 # Then, remove the build folder
 rm -rf ~/ally
 # Then, remove the repo
@@ -40,7 +40,7 @@ then
 fi
     exit 1
 # Now, run `ally init`
-/usr/local/bin/_ally init
+/usr/local/bin/ally init
 # Finally, ally is now installed and ready to use!
 echo "Ally is now installed and ready to use! You need to reload your terminal to use it:"
 echo -e "\033[1msource ~/.zshrc\033[0m"
