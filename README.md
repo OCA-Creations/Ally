@@ -9,18 +9,40 @@ Love the terminal again! Ally removes the need to repeatedly write long commands
 <!-- Github tags here -->
 ## [ocacreations.com](https://ocacreations.com)
 
+To install with a one-liner (inspired by [Homebrew](https://brew.sh)):
+```
+/bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/OCA-Creations/Ally/main/install.sh)"
+```
 ---
-
-
 </div>
 
 
 
 # Overview
+Ally is meant to function _exactly_ like the ZSH `alias` command, except with a *few* superpowers. This means that the invocation is exactly the same:
+```
+alias helloworld='echo "Hello, World\!"'
+# Same thing below!
+ally helloworld='echo "Hello, World\!"'
+```
+However, there is one key difference:
+### Ally _persists_ aliases
+That is the whole point. Ally adds the aliases not to the local terminal session, but rather to the user's `.ally` file, which is then `source`d in the ZSHRC. This means that, while the behavior of `ally` is the same as `alias` for a terminal session, the aliases remain throughout sessions! In the example above, if a user were to open a new tab having only run `alias` in the original, they would see:
+```
+❯ helloworld
+zsh: command not found: helloworld
+```
+However, if the user had run `ally` instead:
+```
+❯ helloworld
+Hello, World!
+```
+
+
 ## 🚧 WARNING 🚧
 This project is functional, but is ⚠️⚠️ NOT YET READY FOR USE! You might damage your system or config by running it! Ally is much more reliable than it was when first started, but still occasionally will exhibit unexpected behavior. The only documented example of this currently is in the `init` command, which will overwrite the existing `.ally` file if invoked again on a system with an existing install.
 ## Installation
-One-liner (inspired by [Homebrew](https://brew.sh):
+One-liner (inspired by [Homebrew](https://brew.sh)):
 ```
 /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/OCA-Creations/Ally/main/install.sh)"
 ```
