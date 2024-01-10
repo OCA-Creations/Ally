@@ -3,8 +3,7 @@
 
 # Ally - ZSH Alias Manager
 
-Love the terminal again! Ally removes the need to repeatedly write long commands, and instead `alias`es them to much shorter ones. A quote from the CEO of OCA Creations LLC, [`@MrDevel0per (Owen Cruz-Abrams)`](https://github.com/MrDevel0per):
-> I honestly can't imagine working in my terminal without a `.ally` file. I have tens of aliases added, and I use them everyday. I almost never add anything to my `.zshrc` - all of my aliases are easily stored with `Ally`.
+Love the terminal again! Ally removes the need to repeatedly write long commands, and instead `alias`es them to much shorter ones.
 
 <!-- Github tags here -->
 ## [ocacreations.com](https://ocacreations.com)
