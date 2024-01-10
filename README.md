@@ -29,11 +29,19 @@ However, there is one key difference:
 ### Ally _persists_ aliases
 That is the whole point. Ally adds the aliases not to the local terminal session, but rather to the user's `.ally` file, which is then `source`d in the ZSHRC. This means that, while the behavior of `ally` is the same as `alias` for a terminal session, the aliases remain throughout sessions! In the example above, if a user were to open a new tab having only run `alias` in the original, they would see:
 ```
+alias helloworld='echo "Hello, World\!"'
+[NEW TERMINAL SESSION]
+
+
 ❯ helloworld
 zsh: command not found: helloworld
 ```
 However, if the user had run `ally` instead:
 ```
+ally helloworld='echo "Hello, World\!"'
+[NEW TERMINAL SESSION]
+
+
 ❯ helloworld
 Hello, World!
 ```
