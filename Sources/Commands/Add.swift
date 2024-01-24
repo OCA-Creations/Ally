@@ -83,7 +83,7 @@ extension Ally {
                 do {
                     var fileContents = try String(contentsOf: dotFileLocation, encoding: .utf8)
                     // Check to see if the alias itself is already in there
-                    if fileContents.range(of: "alias \(options.alias)") == nil {
+                    if fileContents.range(of: "alias \(options.alias)=") == nil {
                         fileContents += aliasLine
                         try fileContents.write(to: dotFileLocation, atomically: true, encoding: .utf8)
                     } else {

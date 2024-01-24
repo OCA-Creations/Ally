@@ -9,11 +9,14 @@ import Foundation
 import ArgumentParser
 
 struct InitOptions: ParsableArguments {
-    @Flag(name: [.long, .customShort("x")], help: "Don't add the source block to the end of .zshrc.")
+    @Flag(name: [.long, .customShort("z")], help: "Don't add the source block to the end of .zshrc.")
     var noZSHRC: Bool = false
 
     @Flag(name: [.long, .customShort("n")], help: "Produce no output when installing the tool.")
     var noOutput: Bool = false
+    
+    @Flag(name: [.long, .customShort("o")], help: "Overwrite the \u{001b}[1m.ally\u{001b}[0m file on install.")
+    var overwriteDotFile: Bool = false
 }
 
 extension Ally {
@@ -38,7 +41,8 @@ extension Ally {
         mutating func run() throws {
             // First, create the .ally file
             let installLocation = CommandLine.arguments[0]
-            // We actually want to create a ZSH function for the 
+            // We actually want to create a ZSH function for the ally command
+            // TODO: Convert to ZSH function that calls the `_ally` binary
             let fileContents = """
            alias ally=\(installLocation)
            """
