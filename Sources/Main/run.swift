@@ -1,9 +1,11 @@
-// Welcome to Ally! This file is called run.swift, not main.swift, because calling it `main` produces errors with the `@main` declaration.
+// Welcome to Ally! 
+// This file is called run.swift, not main.swift, because calling it `main`
+// produces errors with the `@main` declaration.
 
 import Foundation
 import ArgumentParser
 
-//TODO: Can we have a lower version requirement?
+// TODO: Can we have a lower version requirement?
 
 @main
 struct Ally: ParsableCommand {
@@ -22,7 +24,7 @@ struct Ally: ParsableCommand {
         }
         return homeDirectory
     }()
-    
+
     /// The location of the user's `.zshrc` config file on their system.
     static var zshrcFileLocation = {
         var homeDirectory = FileManager.default.homeDirectoryForCurrentUser

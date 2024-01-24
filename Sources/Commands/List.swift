@@ -11,16 +11,16 @@ import ArgumentParser
 struct ListOptions: ParsableArguments {
     @Flag(name: [.long], help: "Don't output the included, user-created docs for the command.")
     var noDocs: Bool = false
-    
+
     @Option(name: [.long, .short], help: "The output file location. All list output will be saved to this file.")
-    var outputLocation: String? = nil
+    var outputLocation: String?
 }
 
 extension Ally {
     struct List: ParsableCommand {
         static var configuration = CommandConfiguration(commandName: "list", abstract: "List all commands added with ally.")
         @OptionGroup var options: ListOptions
-        
+
         mutating func run() throws {
             // Parse DotFile
             do {
@@ -29,8 +29,7 @@ extension Ally {
             } catch {
                 print("There was an error reading your .ally file: \(error.localizedDescription).")
             }
-            
-            
+
         }
     }
 }
