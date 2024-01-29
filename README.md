@@ -76,16 +76,17 @@ Some ideas/todos (strikethrough indicates complete):
 - Improve the quality and organization of the project
 - Improve command docs
 - <s>`ally list` will print a list of aliases</s>
-- `ally add ALIAS "OLD_COMMAND" -docs "DOCS"` will let the user add documentation for an alias (stored in a comment on the line above.)
+- <s>`ally add ALIAS "OLD_COMMAND" -docs "DOCS"` will let the user add documentation for an alias (stored in a comment on the line above.)</s>
 - Support bash and fish shells.
 - Currently, reload doesn't do anything. Can we fix this or remove it altogether?
+    - Being worked on - see [#8](https://github.com/OCA-Creations/Ally/issues/8)
 - Currently, quotes need to be escaped. Can we auto-escape them?
 - When installing, if `--reinstall` is not specified, don't overwrite the .ally file!
 - Should we rename to something other than .ally?
-- Should we have a custom file format like https://github.com/DannyBen/alf\?
+- Should we have a custom file format like https://github.com/DannyBen/alf
 - Check out https://github.com/DannyBen/bashly
 - Should this be public? How can we improve it first?
-- Add an sh install script for oneliner install.
+- <s>Add an sh install script for oneliner install.</s>
 - Add tests (and allow custom directories to be inputted for them)?
 - Allow the user to add a custom name for ally? `ally name CUSTOM_NAME`?
 - Improve code and args for all commands.
@@ -101,7 +102,7 @@ Some ideas/todos (strikethrough indicates complete):
     - `allyutils` or `generalutils` - these are things that make using `ally` or the Terminal easier, such as a `reload` command that reloads everything - `source $HOME_DIR/.ally`, etc.
 - Improve verbosity, especially when adding a command. This could be specified with a degree of verbosity (like TensorFlow). We would need to warn users when entering aliases that already exist or aliasing over existing commands (see CommandRunner.swift to test out if a command already exists).
 - What if we allowed users to create their own CLI tools from scripts? So the user passes in `ally add SCRIPT.py` (or another language), and then ally adds an alias for the script, and creates a CLI for it?
-- Add to PATH instead of an alias.
+- <s>Add to PATH instead of an alias.</s>
 - Save and restore backups of `.ally` files
     - Allow sharing + install of custom `.ally` files?
 - Allow another syntax in `add` command: `->`
