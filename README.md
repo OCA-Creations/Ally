@@ -10,7 +10,7 @@ Love the terminal again! Ally removes the need to repeatedly write long commands
 
 To install with a one-liner (inspired by [Homebrew](https://brew.sh)):
 ```
-/bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/OCA-Creations/Ally/main/install.sh)"
+python3 -c "$(curl -fsSL https://raw.githubusercontent.com/OCA-Creations/Ally/main/scripts/install.py)"
 ```
 ---
 </div>
@@ -51,7 +51,7 @@ This project is functional, but is ⚠️⚠️ NOT YET READY FOR USE! You might
 ## Installation
 One-liner (inspired by [Homebrew](https://brew.sh)):
 ```
-/bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/OCA-Creations/Ally/main/install.sh)"
+python3 -c "$(curl -fsSL https://raw.githubusercontent.com/OCA-Creations/Ally/main/scripts/install.py)"
 ```
 > [!NOTE]  
 > The one-liner above assumes this install is **not** intended to be used for development of the Ally tool itself. Also, if you already have a directory named `Ally` in the location in which you are running the script, then install will fail with the following error:
