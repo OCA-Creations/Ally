@@ -57,18 +57,43 @@ extension DotFile {
             if currentLine.trimmingCharacters(in: .whitespacesAndNewlines).starts(with: "#") {
                 let alDocs = alreadyDocs + "\n" + currentLine
                 returnable += parseAlreadyDocs(alreadyDocs: alDocs, index: index+1, lines: lines)
-            } else {
-                let parts = currentLine.split(separator: "=").map { sub in
+            } else if currentLine.contains("alias ") && currentLine.contains("=") {
+                // This is a potential alias line, parse it
+                let parts = currentLine.split(separator: "=", maxSplits: 1).map { sub in
                     String(sub)
                 }
-                var firstPart = parts[0]
-                let firstPartFifthIndex = firstPart.index(firstPart.startIndex, offsetBy: 5)
-                firstPart = String(firstPart[firstPartFifthIndex...])
-                firstPart = firstPart.replacingOccurrences(of: "alias ", with: "").trimmingCharacters(in: .whitespacesAndNewlines)
-                let secondPart = parts[1]
-                returnable.append(Self.Alias.init(docs: alreadyDocs, aliasName: firstPart, longFormCommand: secondPart))
+                if parts.count >= 2 {
+                    var firstPart = parts[0]
+                    let firstPartFifthIndex = firstPart.index(firstPart.startIndex, offsetBy: 5)
+                    firstPart = String(firstPart[firstPartFifthIndex...])
+                    firstPart = firstPart.replacingOccurrences(of: "alias ", with: "").trimmingCharacters(in: .whitespacesAndNewlines)
+                    
+                    // Handle multi-line commands by checking if the command starts with a quote
+                    var fullCommand = parts[1]
+                    var currentIndex = index + 1
+                    
+                    // If the command starts with a quote but doesn't end with one, it's multi-line
+                    if fullCommand.hasPrefix("\"") && !fullCommand.dropFirst().hasSuffix("\"") {
+                        // Continue reading lines until we find the closing quote
+                        while currentIndex < lines.count {
+                            let nextLine = lines[currentIndex]
+                            fullCommand += "\n" + nextLine
+                            if nextLine.hasSuffix("\"") {
+                                break
+                            }
+                            currentIndex += 1
+                        }
+                    }
+                    
+                    returnable.append(Self.Alias.init(docs: alreadyDocs, aliasName: firstPart, longFormCommand: fullCommand))
+                    returnable += parseAlreadyDocs(alreadyDocs: "", index: currentIndex+1, lines: lines)
+                    return returnable
+                }
+                // If we couldn't parse this as an alias, continue to next line
                 returnable += parseAlreadyDocs(alreadyDocs: "", index: index+1, lines: lines)
-
+            } else {
+                // Skip this line and continue parsing
+                returnable += parseAlreadyDocs(alreadyDocs: "", index: index+1, lines: lines)
             }
 
             return returnable

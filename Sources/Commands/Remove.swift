@@ -51,26 +51,55 @@ extension Ally {
 
 func scanAndRemoveIfNeeded(alias: String, fileLocation: URL, conditionalOutput: Bool) throws {
     var dotAllyContents = try String(contentsOf: fileLocation, encoding: .utf8)
-    var lines = dotAllyContents.split(separator: "\n")
+    var lines = dotAllyContents.split(separator: "\n").map { String($0) }
     let finder = "alias \(alias)"
+    var indexesToRemove: [Int] = []
+    
     for (index, line) in lines.enumerated() {
         if line.localizedCaseInsensitiveContains(finder) {
-            lines.remove(at: index)
+            indexesToRemove.append(index)
+            
+            // Check if this is a multi-line alias by looking for unclosed quotes
+            let parts = line.split(separator: "=", maxSplits: 1).map { String($0) }
+            if parts.count >= 2 {
+                let commandPart = parts[1]
+                // If the command starts with a quote but doesn't end with one, it's multi-line
+                if commandPart.hasPrefix("\"") && !commandPart.dropFirst().hasSuffix("\"") {
+                    // Continue collecting lines until we find the closing quote
+                    var currentIndex = index + 1
+                    while currentIndex < lines.count {
+                        indexesToRemove.append(currentIndex)
+                        if lines[currentIndex].hasSuffix("\"") {
+                            break
+                        }
+                        currentIndex += 1
+                    }
+                }
+            }
+            
             // Remove all lines above the index that are #s as well
-            for (lineIndex, line) in lines[0..<index].reversed().enumerated() {
-                print(line)
-                if line.trimmingCharacters(in: .whitespacesAndNewlines).starts(with: "#") && !line.isEmpty {
-                    lines.remove(at: lineIndex)
-                } else if !line.isEmpty {
+            for reverseIndex in stride(from: index - 1, through: 0, by: -1) {
+                let prevLine = lines[reverseIndex]
+                if prevLine.trimmingCharacters(in: .whitespacesAndNewlines).starts(with: "#") && !prevLine.isEmpty {
+                    indexesToRemove.append(reverseIndex)
+                } else if !prevLine.isEmpty {
                     break
                 }
             }
+            
             if conditionalOutput {
                 print("Alias removed from \(fileLocation.lastPathComponent): ", terminator: "")
                 boldPrint(alias)
             }
+            break // Only remove the first match
         }
     }
+    
+    // Remove lines in reverse order to maintain correct indices
+    for index in indexesToRemove.sorted(by: >) {
+        lines.remove(at: index)
+    }
+    
     dotAllyContents = lines.joined(separator: "\n") + "\n"
     try dotAllyContents.write(to: fileLocation, atomically: true, encoding: .utf8)
     if conditionalOutput {
