@@ -7,7 +7,9 @@
 
 import Foundation
 import ArgumentParser
+#if canImport(Darwin)
 import Darwin
+#endif
 
 struct AddOptions: ParsableArguments {
     @Argument(help: "The alias to be added. This is the command that will be given in the future, not the longform version being aliased to.")

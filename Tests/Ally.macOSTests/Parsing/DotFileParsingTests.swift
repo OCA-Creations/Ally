@@ -11,7 +11,7 @@ final class DotFileParsingTests: XCTestCase {
 
     override func setUpWithError() throws {
         let bundle = Bundle(for: DotFileParsingTests.self)
-        let homeURL = bundle.bundleURL.appendingPathComponent("DotFiles", conformingTo: .folder)
+        let homeURL = bundle.bundleURL.appendingPathComponent("DotFiles")
         setenv("HOME", homeURL.absoluteString, 0)
         print(FileManager.default.homeDirectoryForCurrentUser)
     }
