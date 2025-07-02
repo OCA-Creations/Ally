@@ -20,7 +20,7 @@ let package = Package(
                 .product(name: "ArgumentParser", package: "swift-argument-parser"),
             ]
         ),
-        .testTarget(name: "Ally.macOSTests")
+        .testTarget(name: "Ally.macOSTests", dependencies: ["Ally"])
         
     ]
 )
